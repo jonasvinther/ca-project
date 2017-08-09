@@ -4,7 +4,7 @@ node {
       url: 'git@github.com:jonasvinther/ca-project.git'        
     }
     withDockerContainer('jonasvinther/ca-project') {
-        python tests.py
+        sh 'python tests.py'
     }
     // stage('Test') {
     //     sh 'python tests.py'
