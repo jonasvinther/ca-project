@@ -33,4 +33,8 @@ node {
             app.push("latest")
         }
     }
+
+    stage('Deploy') {
+        sh 'ssh root@207.154.223.214 docker run --name ca-project -p 80:5000 jonasvinther/ca-project'
+    }
 }
