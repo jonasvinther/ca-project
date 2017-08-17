@@ -42,6 +42,7 @@ node {
     }
 
     stage('Functional test') {
+        sh 'sleep 10';
         sh 'curl -I http://207.154.223.214 | grep "200 OK"'
     }
 }
