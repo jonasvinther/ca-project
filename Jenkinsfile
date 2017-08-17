@@ -34,15 +34,23 @@ node {
         }
     }
 
+    stage('Stop running container') {
+        try {
+            sh 'ssh root@207.154.223.214 docker stop ca-project'
+            sh 'ssh root@207.154.223.214 docker rm ca-project'
+        }
+        catch(Exception e) {
+            echo 'No running container found!'
+        } 
+    }
+
     stage('Deploy to production') {
         sh 'ssh root@207.154.223.214 docker pull jonasvinther/ca-project'
-        sh 'ssh root@207.154.223.214 docker stop ca-project'
-        sh 'ssh root@207.154.223.214 docker rm ca-project'
         sh 'ssh root@207.154.223.214 docker run -d --name ca-project --restart=always -p 80:5000 jonasvinther/ca-project'
     }
 
     stage('Functional test') {
         sh 'sleep 10';
-        sh 'curl -I http://207.154.223.214 | grep "200 OK"'
+        sh 'curl -I --silent http://207.154.223.214 | grep "200 OK"'
     }
 }
