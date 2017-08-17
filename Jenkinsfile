@@ -54,3 +54,22 @@ node {
         sh 'curl -I --silent http://207.154.223.214 | grep "200 OK"'
     }
 }
+
+post {
+    always {
+        echo 'One way or another, I have finished'
+        deleteDir() /* clean up our workspace */
+    }
+    success {
+        echo 'I succeeeded!'
+    }
+    unstable {
+        echo 'I am unstable :/'
+    }
+    failure {
+        echo 'I failed :('
+    }
+    changed {
+        echo 'Things were different before...'
+    }
+}
