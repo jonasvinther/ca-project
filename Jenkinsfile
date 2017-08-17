@@ -1,5 +1,7 @@
 pipeline {
-    def app
+    define {
+        def app
+    }
     
     stages {
         stage('Clone repository') {
