@@ -1,9 +1,7 @@
 pipeline {
-    agent any
+    def app
     
     stages {
-        def app
-
         stage('Clone repository') {
             /* Let's make sure we have the repository cloned to our workspace */
 
@@ -61,7 +59,7 @@ pipeline {
     post {
         always {
             echo 'One way or another, I have finished'
-            deleteDir() /* clean up our workspace */
+            deleteDir()
         }
         success {
             echo 'I succeeeded!'
@@ -77,3 +75,4 @@ pipeline {
         }
     }
 }
+
